@@ -1,0 +1,32 @@
+<div ng-controller="IncomeController as incomeCtrl">
+	<h3>Income Sources</h3>
+	<table>
+		<tr>
+			<th>Job</th>
+			<th>Payrate</th>
+			<th>Hours</th>
+			<th>Gross Monthly</th>
+			<th>Tax</th>
+			<th>Net Monthly</th>
+			<th>Bi-Weekly</th>
+		</tr>
+		<tr ng-repeat="income in incomeCtrl.incomes">
+			<td>{{income.job}}</td>
+			<td>{{income.payrate | currency}}</td>
+			<td>{{income.hours | currency}}</td>
+			<td>{{income.gross | currency}}</td>
+			<td>{{income.tax | number:2}}%</td>
+			<td>{{income.net | currency}}</td>
+			<td>{{income.biweekly | currency}}</td>
+		</tr>
+	</table>
+
+	<form ng-submit="incomeCtrl.addIncome(incomeCtrl.newIncome)">
+	<input type="text" ng-model="incomeCtrl.newIncome.job" ngRequired="true" />
+	<select ng-options="type as type.type for type in incomeCtrl.types track by type.id" ng-model="incomeCtrl.newIncome.type" ng-change="incomeCtrl.modifyHours()"></select>
+	<input type="number" step=".01" ng-model="incomeCtrl.newIncome.payrate" ngRequired="true" />
+	<input type="number" step="0.0001" ng-model="incomeCtrl.newIncome.hours" />
+	<input type="number" step=".01" ng-model="incomeCtrl.newIncome.taxPercent" ngRequired="true" />
+	<input type="submit" value="Save Income" />
+	</form>
+</div>

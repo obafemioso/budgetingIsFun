@@ -1,0 +1,21 @@
+{
+	"type": "Collection",
+	"properties": {
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "name",
+			"order": 0
+		},
+		"percentAllotment": {
+			"name": "percentAllotment",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "percentAllotment",
+			"order": 1
+		}
+	}
+}

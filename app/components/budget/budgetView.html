@@ -1,0 +1,38 @@
+<div ng-controller="BudgetController as budgetCtrl">
+	<table ng-repeat="budget in budgetCtrl.budgets">
+		<tr>
+			<th>{{budget.name}}</th>
+			<th></th>
+			<th>Per Pay Period</th>
+			<th>Budget</th>
+		</tr>
+		<tr ng-repeat="item in budgetCtrl.items | where:{budgetId: budget.id}">
+			<td>{{item.name}}</td>
+			<td></td>
+			<td>{{item.amount/2 | currency}}</td>
+			<td>{{item.amount | currency}}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td><strong>Total:</strong></td>
+			<td>{{budgetCtrl.total(budget.id) | currency}}</td>
+		</tr>
+	</table>
+
+	<h3>Budgets</h3>
+	<form ng-submit="budgetCtrl.saveBudget(budgetCtrl.newBudget)">
+	<input type="text" ng-model="budgetCtrl.newBudget.name" ngRequired="true" />
+	<input type="number" step=".01" ng-model="budgetCtrl.newBudget.percent" ngRequired="true" />
+	<input type="submit" value="Save Budget" />
+	</form>
+
+	<h3>Items</h3>
+	<form ng-submit="budgetCtrl.addItem(budgetCtrl.newItem)">
+	<input type="text" ng-model="budgetCtrl.newItem.name" ngRequired="true" />
+	<input type="number" step=".01" ng-model="budgetCtrl.newItem.amount" ngRequired="true" />
+	<select ng-model="budgetCtrl.newItem.budgetId">
+		<option ng-repeat="budget in budgetCtrl.budgets" value="{{budget.id}}">{{budget.name}}</option>
+	<input type="submit" value="Save Item" />
+	</form>
+</div>

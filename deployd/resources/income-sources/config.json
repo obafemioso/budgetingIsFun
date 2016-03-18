@@ -1,0 +1,45 @@
+{
+	"type": "Collection",
+	"properties": {
+		"job": {
+			"name": "job",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "job",
+			"order": 0
+		},
+		"incomeType": {
+			"name": "incomeType",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "incomeType",
+			"order": 1
+		},
+		"payrate": {
+			"name": "payrate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "payrate",
+			"order": 2
+		},
+		"hours": {
+			"name": "hours",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "hours",
+			"order": 3
+		},
+		"taxPercent": {
+			"name": "taxPercent",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "taxPercent",
+			"order": 4
+		}
+	}
+}

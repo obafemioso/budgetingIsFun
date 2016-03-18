@@ -1,0 +1,29 @@
+{
+	"type": "Collection",
+	"properties": {
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "name",
+			"order": 0
+		},
+		"amount": {
+			"name": "amount",
+			"type": "number",
+			"typeLabel": "number",
+			"required": true,
+			"id": "amount",
+			"order": 1
+		},
+		"budgetId": {
+			"name": "budgetId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "budgetId",
+			"order": 2
+		}
+	}
+}
