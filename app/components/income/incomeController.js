@@ -1,42 +1,19 @@
-angular.module("budgettingIsFun")
-	.constant("deployd", "http://localhost:2403")
-	.constant("partTime", "23ab7985d307dab2")
-	.constant("fullTime", "deb0980f74cd6b33")
-	.constant("semiMonthly", "6eddc802d96c18f2")
-	.constant("biWeekly", "c585919ae006086c")
-	.constant("yearly", "a5b60c5bbd52295d")
-	.controller("IncomeController", ['$http', 'deployd', "partTime", "fullTime", "semiMonthly", "biWeekly", "yearly", function($http, deployd, partTime, fullTime, semiMonthly, biWeekly, yearly) {
+angular.module('budgettingIsFun')
+	.constant('deployd', 'http://localhost:2403')
+	.constant('partTime', '23ab7985d307dab2')
+	.constant('fullTime', 'deb0980f74cd6b33')
+	.constant('semiMonthly', '6eddc802d96c18f2')
+	.constant('biWeekly', 'c585919ae006086c')
+	.constant('yearly', 'a5b60c5bbd52295d')
+	.controller('IncomeController', ['$http', 'deployd', 'partTime', 'fullTime', 'semiMonthly', 'biWeekly', 'yearly', 'incomeService', function($http, deployd, partTime, fullTime, semiMonthly, biWeekly, yearly, incomeService) {
 		var self = this;
 
-		self.normalizedIncomes = function(incomes) {
-			if(!angular.isArray(incomes))
-				incomes = [incomes];
+		self.message = incomeService.message;
 
-			var normalizedIncomes = [];
-
-			angular.forEach(incomes, function(income) {
-				var normIncome = {};
-
-				normIncome.job = income.job;
-				normIncome.payrate = income.payrate;
-				normIncome.hours = income.hours;
-				normIncome.gross = income.payrate * income.hours * 4;
-				normIncome.tax = income.taxPercent;
-				normIncome.net = normIncome.gross * (1 - (income.taxPercent / 100));
-				normIncome.biweekly = normIncome.net / 2;
-
-				normalizedIncomes.push(normIncome);
-			})
-
-			return normalizedIncomes;
-		};
-
-		self.incomes = [];
-
-		$http.get(deployd + '/income-sources')
-			.success(function(incomes) {
-				self.incomes = self.normalizedIncomes(incomes);
-			}).error(function(err) {
+		incomeService.getIncomes()
+			.then(function(data) {
+				self.incomes = data;
+			}, function(err) {
 				console.log(err);
 			});
 

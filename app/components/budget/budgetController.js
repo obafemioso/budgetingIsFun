@@ -5,7 +5,7 @@ angular.module('budgettingIsFun')
 
 		self.budgets = [];
 		self.items = [];
-
+  
 		$http.get(deployd + '/budgets')
 			.success(function(categories) {
 				self.budgets = categories;
