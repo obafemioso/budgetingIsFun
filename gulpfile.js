@@ -3,6 +3,7 @@ var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
+var livereload = require('gulp-livereload');
 
 gulp.task('build', function() {
 	gulp.src([
@@ -26,6 +27,7 @@ gulp.task('js', function () {
     	.pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('.'))
+    .pipe(livereload({start:true}));
 });
 
 gulp.task('watch', ['js'], function() {

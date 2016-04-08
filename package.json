@@ -4,6 +4,7 @@
     "angular-filter": "^0.5.8",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
+    "gulp-livereload": "^3.8.1",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
