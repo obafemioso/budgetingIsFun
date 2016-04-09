@@ -22,17 +22,21 @@
 
 	<h3>Budgets</h3>
 	<form ng-submit="budgetCtrl.saveBudget(budgetCtrl.newBudget)">
+	<label>Name</label>
 	<input type="text" ng-model="budgetCtrl.newBudget.name" ngRequired="true" />
+	<label>Percent</label>
 	<input type="number" step=".01" ng-model="budgetCtrl.newBudget.percent" ngRequired="true" />
 	<input type="submit" value="Save Budget" />
 	</form>
 
 	<h3>Items</h3>
 	<form ng-submit="budgetCtrl.addItem(budgetCtrl.newItem)">
+	<label>Name</label>
 	<input type="text" ng-model="budgetCtrl.newItem.name" ngRequired="true" />
+	<label>Amount</label>
 	<input type="number" step=".01" ng-model="budgetCtrl.newItem.amount" ngRequired="true" />
-	<select ng-model="budgetCtrl.newItem.budgetId">
-		<option ng-repeat="budget in budgetCtrl.budgets" value="{{budget.id}}">{{budget.name}}</option>
+	<label>Budget</label>
+	<select ng-options="budget as budget.name for budget in budgetCtrl.budgets track by budget.id" ng-model="budgetCtrl.newItem.budgetId">
 	<input type="submit" value="Save Item" />
 	</form>
 </div>

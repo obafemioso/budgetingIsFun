@@ -1,12 +1,12 @@
 {
 	"type": "Collection",
 	"properties": {
-		"type": {
-			"name": "type",
+		"name": {
+			"name": "name",
 			"type": "string",
 			"typeLabel": "string",
 			"required": true,
-			"id": "type",
+			"id": "name",
 			"order": 0
 		}
 	}

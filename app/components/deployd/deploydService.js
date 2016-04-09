@@ -1,39 +1,100 @@
-function normalizeIncomes(incomes) {
-			if(!angular.isArray(incomes))
-				incomes = [incomes];
-
-			var normalizedIncomes = [];
-
-			angular.forEach(incomes, function(income) {
-				var normIncome = {};
-
-				normIncome.job = income.job;
-				normIncome.payrate = income.payrate;
-				normIncome.hours = income.hours;
-				normIncome.gross = income.payrate * income.hours * 4;
-				normIncome.tax = income.taxPercent;
-				normIncome.net = normIncome.gross * (1 - (income.taxPercent / 100));
-				normIncome.biweekly = normIncome.net / 2;
-
-				normalizedIncomes.push(normIncome);
-			})
-
-			return normalizedIncomes;
-		};
-
 function deploydService($http, $q, deployd) {
+	//budgets
+	var budgets = function() {
+		var deferred = $q.defer();
 
-	this.getIncomes = function() {
+		$http.get(deployd + '/budgets')
+			.success(function(budgets) {
+				deferred.resolve(budgets);
+			}).error(function(err) {
+				deferred.reject(err);
+			});
+
+		return deferred.promise;
+	};
+
+	var saveBudget = function(newBudget) {
+		var deferred = $q.defer();
+
+		$http.post(deployd + '/budgets', {
+			name: newBudget.name,
+			percentAllotment: newBudget.percent
+		}).success(function(budget) {
+			deferred.resolve(budget);
+		}).error(function(err) {
+			deferred.reject(err);
+		});
+
+		return deferred.promise;
+	};
+
+	//incomes
+	var incomes = function() {
 		var deferred = $q.defer();
 
 		$http.get(deployd + '/income-sources')
 			.success(function(incomes) {
-				deferred.resolve(normalizeIncomes(incomes));
+				deferred.resolve(incomes);
 			}).error(function(err) {
 				deferred.reject(err);
 			});
+
 		return deferred.promise;
 	};
+
+	var saveIncome = function(newIncome) {
+		var deferred = $q.defer();
+
+		$http.post(deployd + '/income-sources', {
+			job: newIncome.job,
+			incomeType: newIncome.type.id,
+			payrate: newIncome.payrate,
+			hours: newIncome.hours,
+			taxPercent: newIncome.taxPercent
+		}).success(function(income) {
+			deferred.resolve(income);
+		}).error(function(err) {
+			deferred.reject(err);
+		});
+
+		return deferred.promise;
+	};
+
+	//income-types
+	var types = function() {
+		var deferred = $q.defer();
+
+		$http.get(deployd + '/income-types')
+			.success(function(types) {
+				deferred.resolve(types);
+			}).error(function(err) {
+				deferred.reject(err);
+			});
+
+		return deferred.promise;
+	}
+
+	var type = function(id) {
+		var deferred = $q.defer();
+
+		$http.get(deployd + '/income-types?id=' + id)
+			.success(function(type) {
+				deferred.resolve(type);
+			}).error(function(err) {
+				console.log(err);
+			});
+
+			return deferred.promise;
+	};
+
+	this.getAllBudgets = budgets;
+	this.saveBudget = saveBudget;
+	
+	this.getAllIncomes = incomes;
+	this.saveIncome = saveIncome;
+
+	this.getAllTypes = types;
+	this.getType = type;
 }
 
 angular.module('budgettingIsFun')

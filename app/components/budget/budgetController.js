@@ -1,37 +1,23 @@
 angular.module('budgettingIsFun')
 	.constant('deployd', 'http://localhost:2403')
-	.controller('BudgetController', ['$http', 'deployd', function($http, deployd) {
+	.controller('BudgetController', ['$http', 'deployd', 'budgetService', function($http, deployd, budgetService) {
 		var self = this;
 
-		self.budgets = [];
+		self.budgets;
 		self.items = [];
   
-		$http.get(deployd + '/budgets')
-			.success(function(categories) {
-				self.budgets = categories;
-				$http.get(deployd + '/budget-items')
-					.success(function(items) {
-						self.items = items;
-					})
-					.error(function(err) {
-						console.log(err);
-					});
-			}).error(function(err) {
-				console.log(err);
-			});
+  		budgetService.getAllBudgets()
+  			.then(function(budgets) {
+  				self.budgets = budgets;
+  			}, function(err) {
+  				console.log(err);
+  			});
 
 		self.newBudget = {};
 
 		self.saveBudget = function(newBudget) {
-			$http.post(deployd + '/budgets', {
-				name: newBudget.name,
-				percentAllotment: newBudget.percent
-			}).success(function(budget) {
-				self.newBudget = {};
-				self.budgets.push(budget);
-			}).error(function(err) {
-				console.log(err);
-			});
+			budgetService.saveBudget(newBudget);
+			self.newBudget = {};
 		};
 
 		self.newItem = {};

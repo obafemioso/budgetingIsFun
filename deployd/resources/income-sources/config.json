@@ -9,12 +9,12 @@
 			"id": "job",
 			"order": 0
 		},
-		"incomeType": {
-			"name": "incomeType",
+		"incomeTypeId": {
+			"name": "incomeTypeId",
 			"type": "string",
 			"typeLabel": "string",
 			"required": false,
-			"id": "incomeType",
+			"id": "incomeTypeId",
 			"order": 1
 		},
 		"payrate": {
