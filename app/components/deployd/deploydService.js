@@ -28,6 +28,35 @@ function deploydService($http, $q, deployd) {
 		return deferred.promise;
 	};
 
+	var budgetItems = function() {
+		var deferred = $q.defer();
+
+		$http.get(deployd + '/budget-items')
+			.success(function(items) {
+				deferred.resolve(items);
+			}).error(function(err) {
+				console.log(err);
+			});
+
+		return deferred.promise;
+	};
+
+	var saveBudgetItem = function(newBudgetItem) {
+		var deferred = $q.defer();
+
+		$http.post(deployd + '/budget-items', {
+			name: newBudgetItem.name,
+			amount: newBudgetItem.amount,
+			budgetId: newBudgetItem.budget.id
+		}).success(function(newBudgetItem) {
+			deferred.resolve(newBudgetItem);
+		}).error(function(err) {
+			deferred.reject(err);
+		});
+
+		return deferred.promise;
+	};
+
 	//incomes
 	var incomes = function() {
 		var deferred = $q.defer();
@@ -47,7 +76,7 @@ function deploydService($http, $q, deployd) {
 
 		$http.post(deployd + '/income-sources', {
 			job: newIncome.job,
-			incomeType: newIncome.type.id,
+			incomeTypeId: newIncome.incomeType.id,
 			payrate: newIncome.payrate,
 			hours: newIncome.hours,
 			taxPercent: newIncome.taxPercent
@@ -61,12 +90,12 @@ function deploydService($http, $q, deployd) {
 	};
 
 	//income-types
-	var types = function() {
+	var incomeTypes = function() {
 		var deferred = $q.defer();
 
 		$http.get(deployd + '/income-types')
-			.success(function(types) {
-				deferred.resolve(types);
+			.success(function(incomeTypes) {
+				deferred.resolve(incomeTypes);
 			}).error(function(err) {
 				deferred.reject(err);
 			});
@@ -74,11 +103,11 @@ function deploydService($http, $q, deployd) {
 		return deferred.promise;
 	}
 
-	var type = function(id) {
+	var incomeType = function(id) {
 		var deferred = $q.defer();
 
 		$http.get(deployd + '/income-types?id=' + id)
-			.success(function(type) {
+			.success(function(incomeType) {
 				deferred.resolve(type);
 			}).error(function(err) {
 				console.log(err);
@@ -89,12 +118,14 @@ function deploydService($http, $q, deployd) {
 
 	this.getAllBudgets = budgets;
 	this.saveBudget = saveBudget;
-	
+	this.getAllBudgetItems = budgetItems;
+	this.saveBudgetItem = saveBudgetItem;
+
 	this.getAllIncomes = incomes;
 	this.saveIncome = saveIncome;
 
-	this.getAllTypes = types;
-	this.getType = type;
+	this.getAllIncomeTypes = incomeTypes;
+	this.getIncomeType = incomeType;
 }
 
 angular.module('budgettingIsFun')

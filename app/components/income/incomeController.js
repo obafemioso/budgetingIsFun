@@ -3,9 +3,9 @@ angular.module('budgettingIsFun')
 		function(incomeService) {
 			var self = this;
 
-			self.incomes;
-			self.types;
-			
+			self.incomes = [];
+			self.incomeTypes = [];
+
 			//initially get incomes
 			incomeService.getAllIncomes()
 				.then(function(incomes) {
@@ -15,15 +15,15 @@ angular.module('budgettingIsFun')
 				});
 
 
-			//initially get types
-			incomeService.getAllTypes()
-				.then(function(types) {
-					self.types = types;
+			//initially get incomeTypes
+			incomeService.getAllIncomeTypes()
+				.then(function(incomeTypes) {
+					self.incomeTypes = incomeTypes;
 				}, function(err) {
 					console.log(err);
 				});
 
-			self.newIncome;
+			self.newIncome = {};
 
 			self.saveIncome = function(newIncome) {
 				incomeService.saveIncome(newIncome);

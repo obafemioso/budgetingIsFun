@@ -28,7 +28,7 @@
 	<label>Job</label>
 	<input type="text" ng-model="incomeCtrl.newIncome.job" ngRequired="true" />
 	<label>Type</label>
-	<select ng-options="type as type.name for type in incomeCtrl.types track by type.id" ng-model="incomeCtrl.newIncome.type"></select>
+	<select ng-options="incomeType as incomeType.name for incomeType in incomeCtrl.incomeTypes track by incomeType.id" ng-model="incomeCtrl.newIncome.incomeType"></select>
 	<label>Payrate</label>
 	<input type="number" step=".01" ng-model="incomeCtrl.newIncome.payrate" ngRequired="true" />
 	<label>Hours</label>

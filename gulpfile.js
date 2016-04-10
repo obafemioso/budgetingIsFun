@@ -7,9 +7,9 @@ var livereload = require('gulp-livereload');
 
 gulp.task('build', function() {
 	gulp.src([
-    'node_modules/angular/angular.min.js', 
-    'node_modules/angular-filter/dist/*.min.js', 
-    'assets/libs/*min.js', 'app/filters/*.js'
+    'node_modules/angular/angular.js', 
+    'node_modules/angular-filter/dist/angular-filter.js', 
+    'assets/libs/*[^min].js', 'app/filters/*.js'
     ])
 		.pipe(sourcemaps.init())
       .pipe(concat('plugins.js'))

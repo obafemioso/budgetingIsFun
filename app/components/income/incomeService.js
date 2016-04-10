@@ -54,7 +54,7 @@ function getAdjustedPayrate(payrate, type){
 //income service provides methods to add and get incomes
 function incomeService($q, deploydService) {
 	var incomes = [];
-	var types = [];
+	var incomeTypes = [];
 
 	//incomes
 	var getAllIncomes = function() {
@@ -69,41 +69,41 @@ function incomeService($q, deploydService) {
 	};
 
 	var saveIncome = function(newIncome){
-		newIncome.payrate = getAdjustedPayrate(newIncome.payrate, newIncome.type.name);
-		newIncome.hours = (!newIncome.hours) ? getHours(newIncome.type.name) : newIncome.hours;
+		newIncome.payrate = getAdjustedPayrate(newIncome.payrate, newIncome.incomeType.name);
+		newIncome.hours = (!newIncome.hours) ? getHours(newIncome.incomeType.name) : newIncome.hours;
 
 		deploydService.saveIncome(newIncome)
-			.then(function(income) {
+			.then(function(newIncome) {
 				incomes.push(self.normalizeIncomes(newIncome)[0]);
 			}, function(err) {
 				console.log(err)
 			});
 	};
 
-	//types
-	var getAllTypes = function() {
-		if(types != 0){
+	//income-types
+	var getAllIncomeTypes = function() {
+		if(incomeTypes != 0){
 			return $q.when(types);
 		}
-		return deploydService.getAllTypes()
-			.then(function(allTypes) {
-				types = allTypes;
-				return types;
+		return deploydService.getAllIncomeTypes()
+			.then(function(allIncomeTypes) {
+				incomeTypes = allIncomeTypes;
+				return incomeTypes;
 			});
 	};
 
-	var getType = function(id) {
+	var getIncomeType = function(id) {
 		return deploydService.getType(id)
-			.then(function(type) {
-				return type;
+			.then(function(incomeType) {
+				return incomeType;
 			});
 	};
 
 	this.getAllIncomes = getAllIncomes;
 	this.saveIncome = saveIncome;
 
-	this.getAllTypes = getAllTypes;
-	this.getType = getType;
+	this.getAllIncomeTypes = getAllIncomeTypes;
+	this.getIncomeType = getIncomeType;
 }
 
 angular.module('budgettingIsFun')
