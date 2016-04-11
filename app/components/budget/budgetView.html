@@ -1,7 +1,7 @@
 <div ng-controller="BudgetController as budgetCtrl">
 	<table ng-repeat="budget in budgetCtrl.budgets">
 		<tr>
-			<th>{{budget.name}}</th>
+			<th>{{budget.name}} ({{budget.percentAllotment}}% Cap: {{budgetCtrl.budgetCap(budget) | currency}}) [{{budgetCtrl.budgetUtilization(budget) | number:0}}%]</th>
 			<th></th>
 			<th>Per Pay Period</th>
 			<th>Budget</th>
@@ -14,9 +14,49 @@
 		</tr>
 		<tr>
 			<td></td>
+			<td><strong>Totals:</strong></td>
+			<td>{{budgetCtrl.total(budget) / 2 | currency}}</td>
+			<td>{{budgetCtrl.total(budget) | currency}}</td>
+		</tr>
+		<tr>
 			<td></td>
-			<td><strong>Total:</strong></td>
-			<td>{{budgetCtrl.total(budget.id) | currency}}</td>
+			<td></td>
+			<td><strong>Balance:</strong></td>
+			<td>{{budgetCtrl.budgetBalance(budget) | currency}}</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<th>Budget  Guideline</th>
+			<th></th>
+		</tr>
+		<tr ng-repeat="budget in budgetCtrl.budgets">
+			<td>{{budget.name}}</td>
+			<td>{{budget.percentAllotment}}%</td>
+		</tr>
+		<tr>
+			<td>Total</td>
+			<td>{{budgetCtrl.guidelineTotal()}}%</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<th>Budget Utilizations</th>
+			<th></th>
+		</tr>
+		<tr ng-repeat="budget in budgetCtrl.budgets">
+			<td>{{budget.name}}</td>
+			<td>{{budgetCtrl.budgetUtilization(budget) | number:2}}%</td>
+		</tr>
+		<tr>
+			<td>Taxes</td>
+			<td>{{budgetCtrl.taxUtilization() | number:2}}%</td>
+		</tr>
+		<tr>
+			<td>Total</td>
+			<td>{{budgetCtrl.overviewUtilizationTotal() | number:2}}%</td>
 		</tr>
 	</table>
 

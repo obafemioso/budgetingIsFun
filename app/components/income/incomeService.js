@@ -56,6 +56,8 @@ function incomeService($q, deploydService) {
 	var incomes = [];
 	var incomeTypes = [];
 
+	
+	//Gets and Saves---------------------------------
 	//incomes
 	var getAllIncomes = function() {
 		if(incomes.length != 0){
@@ -98,12 +100,46 @@ function incomeService($q, deploydService) {
 				return incomeType;
 			});
 	};
+	//End Gets and Saves-----------------------------
+
+	//Statistics ------------------------------------
+	var total = function(property) {
+		if(incomes.length > 0 && isFinite(incomes[0][property]))
+			return incomes.reduce(function(prev, curr) { return prev + curr[property]; }, 0);
+	};
+
+	var yearlyGross = function(income) {
+		return income.gross * 13; //13 week months in a year (52 weeks)
+	};
+
+	var yearlyNet = function(income) {
+		return income.net * 13;
+	};
+
+	var totalYearlyGross = function() {
+		return incomes.reduce(function(prev, curr) {
+			return prev + yearlyGross(curr);
+		}, 0);
+	};
+
+	var totalYearlyNet = function() {
+		return incomes.reduce(function(prev, curr) {
+			return prev + yearlyNet(curr);
+		}, 0);
+	};
+	//End Statistics --------------------------------
 
 	this.getAllIncomes = getAllIncomes;
 	this.saveIncome = saveIncome;
 
 	this.getAllIncomeTypes = getAllIncomeTypes;
 	this.getIncomeType = getIncomeType;
+
+	this.yearlyGross = yearlyGross;
+	this.totalYearlyGross = totalYearlyGross;
+	this.yearlyNet = yearlyNet;
+	this.totalYearlyNet = totalYearlyNet;
+	this.total = total;
 }
 
 angular.module('budgettingIsFun')

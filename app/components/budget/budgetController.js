@@ -1,10 +1,22 @@
 angular.module('budgettingIsFun')
-	.controller('BudgetController', ['budgetService', function(budgetService) {
+	.controller('BudgetController', ['budgetService', 'incomeService', function(budgetService, incomeService) {
 		var self = this;
 
 		self.budgets = [];
 		self.budgetItems = [];
   
+		self.budgetCap = budgetService.budgetCap;
+
+		self.budgetUtilization = budgetService.budgetUtilization;
+
+		self.budgetBalance = budgetService.budgetBalance;
+
+		self.guidelineTotal = budgetService.guidelineTotal;
+
+		self.taxUtilization = budgetService.taxUtilization;
+
+		self.overviewUtilizationTotal = budgetService.overviewUtilizationTotal;
+
   		budgetService.getAllBudgets()
   			.then(function(budgets) {
   				self.budgets = budgets;

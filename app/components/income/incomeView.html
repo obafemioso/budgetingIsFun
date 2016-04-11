@@ -22,6 +22,24 @@
 			<td>{{income.net | currency}}</td>
 			<td>{{income.biweekly | currency}}</td>
 		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td><strong>Totals:</strong></td>
+			<td>{{incomeCtrl.total('gross') | currency}}</td>
+			<td></td>
+			<td>{{incomeCtrl.total('net') | currency}}</td>
+			<td>{{incomeCtrl.total('biweekly') | currency}}</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td><strong>Yearly Totals:</strong></td>
+			<td>{{incomeCtrl.totalYearlyGross() | currency}}</td>
+			<td></td>
+			<td>{{incomeCtrl.totalYearlyNet() | currency}}</td>
+			<td>{{incomeCtrl.total('biweekly') | currency}}</td>
+		</tr>
 	</table>
 
 	<form ng-submit="incomeCtrl.saveIncome(incomeCtrl.newIncome)">

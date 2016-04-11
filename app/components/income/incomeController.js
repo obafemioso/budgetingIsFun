@@ -6,6 +6,8 @@ angular.module('budgettingIsFun')
 			self.incomes = [];
 			self.incomeTypes = [];
 
+			self.totalYearlyGross = incomeService.totalYearlyGross;
+			self.totalYearlyNet = incomeService.totalYearlyNet;
 			//initially get incomes
 			incomeService.getAllIncomes()
 				.then(function(incomes) {
@@ -13,7 +15,6 @@ angular.module('budgettingIsFun')
 				}, function(err) {
 					console.log(err);
 				});
-
 
 			//initially get incomeTypes
 			incomeService.getAllIncomeTypes()
@@ -29,4 +30,6 @@ angular.module('budgettingIsFun')
 				incomeService.saveIncome(newIncome);
 				self.newIncome = {};
 			};
+
+			self.total = incomeService.total;
 	}]);
