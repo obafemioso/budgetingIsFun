@@ -3,12 +3,11 @@ angular.module('budgettingIsFun')
 		function(incomeService) {
 			var self = this;
 
+			//init-------------------------------
 			self.incomes = [];
 			self.incomeTypes = [];
 
-			self.totalYearlyGross = incomeService.totalYearlyGross;
-			self.totalYearlyNet = incomeService.totalYearlyNet;
-			//initially get incomes
+			//Get incomes
 			incomeService.getAllIncomes()
 				.then(function(incomes) {
 					self.incomes = incomes;
@@ -16,14 +15,16 @@ angular.module('budgettingIsFun')
 					console.log(err);
 				});
 
-			//initially get incomeTypes
+			//Get incomeTypes
 			incomeService.getAllIncomeTypes()
 				.then(function(incomeTypes) {
 					self.incomeTypes = incomeTypes;
 				}, function(err) {
 					console.log(err);
 				});
+			//init end---------------------------
 
+			//actions----------------------------
 			self.newIncome = {};
 
 			self.saveIncome = function(newIncome) {
@@ -31,5 +32,8 @@ angular.module('budgettingIsFun')
 				self.newIncome = {};
 			};
 
+			self.totalYearlyGross = incomeService.totalYearlyGross;
+			self.totalYearlyNet = incomeService.totalYearlyNet;			
 			self.total = incomeService.total;
+			//actions end------------------------
 	}]);

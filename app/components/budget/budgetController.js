@@ -2,21 +2,11 @@ angular.module('budgettingIsFun')
 	.controller('BudgetController', ['budgetService', 'incomeService', function(budgetService, incomeService) {
 		var self = this;
 
+  		//init-----------------------------------
 		self.budgets = [];
 		self.budgetItems = [];
-  
-		self.budgetCap = budgetService.budgetCap;
-
-		self.budgetUtilization = budgetService.budgetUtilization;
-
-		self.budgetBalance = budgetService.budgetBalance;
-
-		self.guidelineTotal = budgetService.guidelineTotal;
-
-		self.taxUtilization = budgetService.taxUtilization;
-
-		self.overviewUtilizationTotal = budgetService.overviewUtilizationTotal;
-
+  		
+  		//Get budgets and budget items
   		budgetService.getAllBudgets()
   			.then(function(budgets) {
   				self.budgets = budgets;
@@ -30,6 +20,9 @@ angular.module('budgettingIsFun')
   				console.log(err);
   			});
 
+  		//init end-------------------------------
+
+  		//actions--------------------------------
 		self.newBudget = {};
 
 		self.saveBudget = function(newBudget) {
@@ -44,5 +37,13 @@ angular.module('budgettingIsFun')
 			self.newBudgetItem = {};
 		};
 
+		self.budgetCap = budgetService.budgetCap;
+		self.budgetUtilization = budgetService.budgetUtilization;
+		self.budgetBalance = budgetService.budgetBalance;
+		self.guidelineTotal = budgetService.guidelineTotal;
+		self.taxUtilization = budgetService.taxUtilization;
+		self.overviewUtilizationTotal = budgetService.overviewUtilizationTotal;
 		self.total = budgetService.total;
+
+		//actions end----------------------------
 	}]);
