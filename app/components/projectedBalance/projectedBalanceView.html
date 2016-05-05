@@ -1,0 +1,17 @@
+<div ng-controller="ProjectedBalanceController as projBalCtrl">
+	<table>
+		<tr>
+			<td colspan="2">PROJECTED BALANCE<br/>(Projected income minus expenses)</td>
+			<td>{{projBalCtrl.getBalance() | currency}}</td>
+		</tr>
+		<tr>
+			<td rowspan="2">Emergency Fund Line</td>
+			<td>1-month</td>
+			<td>3-months</td>
+		</tr>
+		<tr>
+			<td>{{projBalCtrl.coreExpenses(1)}}</td>
+			<td>{{projBalCtrl.coreExpenses(3)}}
+		</td>
+	</table>
+</div>
