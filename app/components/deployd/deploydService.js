@@ -28,6 +28,20 @@ function deploydService($http, $q, deployd) {
 		return deferred.promise;
 	};
 
+	var getBudget = function(budgetId) {
+		var deferred = $q.defer();
+
+		$http.get(deployd + '/budgets', {
+			id: budgetId
+		}).success(function(budget){
+			deferred.resolve(budget);
+		}).error(function(err) {
+			deferred.reject(err);
+		});
+
+		return deferred.promise;
+	};
+
 	var budgetItems = function() {
 		var deferred = $q.defer();
 
@@ -120,6 +134,7 @@ function deploydService($http, $q, deployd) {
 	this.saveBudget = saveBudget;
 	this.getAllBudgetItems = budgetItems;
 	this.saveBudgetItem = saveBudgetItem;
+	this.getBudget = getBudget;
 
 	this.getAllIncomes = incomes;
 	this.saveIncome = saveIncome;

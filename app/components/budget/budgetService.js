@@ -23,6 +23,17 @@ function budgetService($q, deploydService, incomeService) {
 				console.log(err);
 			});
 	};
+
+	var getBudget = function(budgetId) {
+		deploydService.getBudget(budgetId)
+			.then(function(budget) {
+				return budget;
+			}, function(err) {
+				console.log(err);
+				return null;
+			});
+	};
+
 	//budget-items
 	var getAllBudgetItems = function() {
 		if(budgetItems.length != 0){
@@ -51,6 +62,25 @@ function budgetService($q, deploydService, incomeService) {
 			if(curr.budgetId == budget.id)
 				return prev + curr.amount;
 			return prev;
+		}, 0);
+	};
+
+	var totalCore = function() {
+		var totalCore = 0;
+
+		angular.forEach(budgets, function(budget) {
+			if(budget.name == 'Fixed' || budget.name == 'Flex') {
+				var x = total(budget);
+				totalCore += x;
+			}
+		});
+
+		return totalCore;
+	};
+
+	var totalAll = function() {
+		return budgetItems.reduce(function(prev, curr) {
+			return prev + curr.amount;
 		}, 0);
 	};
 
@@ -88,9 +118,12 @@ function budgetService($q, deploydService, incomeService) {
 
 	this.getAllBudgets = getAllBudgets;
 	this.saveBudget = saveBudget;
+	this.getBudget = getBudget;
 	this.getAllBudgetItems = getAllBudgetItems;
 	this.saveBudgetItem = saveBudgetItem;
 	this.total = total;
+	this.totalCore = totalCore;
+	this.totalAll = totalAll;
 
 	this.budgetCap = budgetCap;
 	this.budgetUtilization = budgetUtilization;
