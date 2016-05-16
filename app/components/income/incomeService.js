@@ -35,22 +35,6 @@ function getHours(type) {
 	}
 }
 
-//returns payrate adjusted to 40 hour/week rate
-function getAdjustedPayrate(payrate, type){
-	switch(type){
-		case 'Weekly':
-			return payrate; //do nothing payrate is what it is
-		case 'Bi-Weekly':
-			return payrate / 80; //80 hours in 2 weeks
-		case 'Semi-Monthly':
-			return payrate / (40*13/6); //86.6666 hours in a semi-month
-		case 'Monthly':
-			return payrate / (40*13/3); //173.3333 hours in a month
-		case 'Yearly':
-			return payrate / 2080; ///2080 hours in a year
-	}
-}
-
 //income service provides methods to add and get incomes
 function incomeService($q, deploydService) {
 	var incomes = [];
@@ -71,9 +55,6 @@ function incomeService($q, deploydService) {
 	};
 
 	var saveIncome = function(newIncome){
-		newIncome.payrate = getAdjustedPayrate(newIncome.payrate, newIncome.incomeType.name);
-		newIncome.hours = (!newIncome.hours) ? getHours(newIncome.incomeType.name) : newIncome.hours;
-
 		deploydService.saveIncome(newIncome)
 			.then(function(newIncome) {
 				incomes.push(self.normalizeIncomes(newIncome)[0]);
@@ -127,6 +108,24 @@ function incomeService($q, deploydService) {
 			return prev + yearlyNet(curr);
 		}, 0);
 	};
+
+	var calculatePayrate = function calculatePayrate(type, wage, hours){
+		if(!hours)
+			hours = 40;
+
+		switch(type.name){
+			case 'Weekly':
+				return wage / hours; //do nothing payrate is what it is
+			case 'Bi-Weekly':
+				return wage / (hours * 2); //80 hours in 2 weeks
+			case 'Semi-Monthly':
+				return wage / (hours * 13 / 6); //86.6666 hours in a semi-month
+			case 'Monthly':
+				return wage / (hours * 13 / 3); //173.3333 hours in a month
+			case 'Yearly':
+				return wage / (hours * 52); ///2080 hours in a year
+		}
+	};
 	//End Statistics --------------------------------
 
 	this.getAllIncomes = getAllIncomes;
@@ -140,6 +139,8 @@ function incomeService($q, deploydService) {
 	this.yearlyNet = yearlyNet;
 	this.totalYearlyNet = totalYearlyNet;
 	this.total = total;
+
+	this.calculatePayrate = calculatePayrate;
 }
 
 angular.module('budgettingIsFun')

@@ -32,6 +32,15 @@ angular.module('budgettingIsFun')
 				self.newIncome = {};
 			};
 
+			self.payInfo = {};
+			self.calculatedPayrate = 0;
+			self.calculatedHours = 0;
+
+			self.calculatePayrate = function(payInfo) {
+				self.calculatedPayrate = incomeService.calculatePayrate(payInfo.incomeType, payInfo.wage, payInfo.hours);
+				self.calculatedHours = (payInfo.hours) ? payInfo.hours : 40;
+			};
+
 			self.totalYearlyGross = incomeService.totalYearlyGross;
 			self.totalYearlyNet = incomeService.totalYearlyNet;			
 			self.total = incomeService.total;
