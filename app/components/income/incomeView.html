@@ -24,7 +24,7 @@
 			<td></td>
 			<td><strong>Totals:</strong></td>
 			<td>{{incomeCtrl.total('gross') | currency}}</td>
-			<td></td>
+			<td>{{incomeCtrl.total('tax') | currency}}</td>
 			<td>{{incomeCtrl.total('net') | currency}}</td>
 			<td>{{incomeCtrl.total('biweekly') | currency}}</td>
 		</tr>
@@ -33,9 +33,9 @@
 			<td></td>
 			<td><strong>Yearly Totals:</strong></td>
 			<td>{{incomeCtrl.totalYearlyGross() | currency}}</td>
-			<td></td>
+			<td>{{incomeCtrl.totalYearlyTax() | currency}}</td>
 			<td>{{incomeCtrl.totalYearlyNet() | currency}}</td>
-			<td>{{incomeCtrl.total('biweekly') | currency}}</td>
+			<td></td>
 		</tr>
 	</table>
 

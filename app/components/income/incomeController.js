@@ -42,7 +42,8 @@ angular.module('budgettingIsFun')
 			};
 
 			self.totalYearlyGross = incomeService.totalYearlyGross;
-			self.totalYearlyNet = incomeService.totalYearlyNet;			
+			self.totalYearlyNet = incomeService.totalYearlyNet;
+			self.totalYearlyTax = incomeService.totalYearlyTax;
 			self.total = incomeService.total;
 			//actions end------------------------
 	}]);

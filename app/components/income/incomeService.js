@@ -85,8 +85,13 @@ function incomeService($q, deploydService) {
 
 	//Statistics ------------------------------------
 	var total = function(property) {
+		if(property == 'tax') {
+			return total('gross') - total('net');
+		}
+		else {
 		if(incomes.length > 0 && isFinite(incomes[0][property]))
 			return incomes.reduce(function(prev, curr) { return prev + curr[property]; }, 0);
+		}
 	};
 
 	var yearlyGross = function(income) {
@@ -107,6 +112,10 @@ function incomeService($q, deploydService) {
 		return incomes.reduce(function(prev, curr) {
 			return prev + yearlyNet(curr);
 		}, 0);
+	};
+
+	var totalYearlyTax = function() {
+		return totalYearlyGross() - totalYearlyNet();
 	};
 
 	var calculatePayrate = function calculatePayrate(type, wage, hours){
@@ -138,6 +147,7 @@ function incomeService($q, deploydService) {
 	this.totalYearlyGross = totalYearlyGross;
 	this.yearlyNet = yearlyNet;
 	this.totalYearlyNet = totalYearlyNet;
+	this.totalYearlyTax = totalYearlyTax;
 	this.total = total;
 
 	this.calculatePayrate = calculatePayrate;

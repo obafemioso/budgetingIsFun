@@ -89,7 +89,7 @@ function budgetService($q, deploydService, incomeService) {
 	};
 
 	var budgetUtilization = function(budget) {
-		return total(budget) / incomeService.total('net') * 100;
+		return total(budget) / incomeService.total('gross') * 100;
 	};
 
 	var budgetBalance = function(budget) {
@@ -106,7 +106,7 @@ function budgetService($q, deploydService, incomeService) {
 		var grossIncome = incomeService.total('gross');
 		var netIncome = incomeService.total('net');
 
-		return (grossIncome - netIncome) / grossIncome;
+		return (grossIncome - netIncome) / grossIncome * 100;
 	};
 
 	var overviewUtilizationTotal = function() {
