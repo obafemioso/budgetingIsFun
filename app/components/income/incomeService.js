@@ -153,5 +153,5 @@ function incomeService($q, deploydService) {
 	this.calculatePayrate = calculatePayrate;
 }
 
-angular.module('budgettingIsFun')
+angular.module('budgetingIsFun')
 	.service('incomeService', ['$q', 'deploydService', incomeService]);

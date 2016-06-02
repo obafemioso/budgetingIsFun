@@ -48,5 +48,5 @@ function deploydProvider($http, $q) {
 	}
 }
 
-angular.module('budgettingIsFun')
+angular.module('budgetingIsFun')
 	.provider('deploydProvider', deploydProvider);

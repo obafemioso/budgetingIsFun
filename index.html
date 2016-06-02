@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app='budgettingIsFun'>
+<html lang="en" ng-app='budgetingIsFun'>
 <head>
   <meta charset="UTF-8">
   <title>Budgetting is Fun!!</title>
@@ -7,12 +7,26 @@
 <body ng-controller="BaseController">
   <h1>{{welcomeMessage}}</h1>
 
-  <ng-include src="'app/components/projectedBalance/projectedBalanceView.html'"></ng-include>
+  <ng-include src="'app/components/login/loginView.html'"></ng-include>
+
+  <!-- <ng-include src="'app/components/projectedBalance/projectedBalanceView.html'"></ng-include>
 
   <ng-include src="'app/components/budget/budgetView.html'"></ng-include>
 
   <ng-include src="'app/components/income/incomeView.html'"></ng-include>
+ -->
 
+  <!-- <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCOqxyqJWHbVXQoRe5yeDDckDFaezCWGFQ",
+      authDomain: "project-5329216778150346102.firebaseapp.com",
+      databaseURL: "https://project-5329216778150346102.firebaseio.com",
+      storageBucket: "",
+    };
+    firebase.initializeApp(config);
+  </script> -->
+    
   <script src="plugins.js"></script>
   <script src="app.js"></script>
 </body>

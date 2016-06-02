@@ -1,4 +1,4 @@
-angular.module('budgettingIsFun')
+angular.module('budgetingIsFun')
 	.controller('BudgetController', ['budgetService', 'incomeService', function(budgetService, incomeService) {
 		var self = this;
 

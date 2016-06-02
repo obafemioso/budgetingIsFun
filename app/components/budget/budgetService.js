@@ -1,4 +1,4 @@
-function budgetService($q, deploydService, incomeService) {
+function budgetService($q, deploydService, incomeService, dataService) {
 	var budgets = [];
 	var budgetItems = [];
 
@@ -8,7 +8,7 @@ function budgetService($q, deploydService, incomeService) {
 		if(budgets.length != 0){
 			return $q.when(budgets);
 		}
-		return deploydService.getAllBudgets()
+		return dataService.getBudgets()
 			.then(function(allBudgets) {
 				budgets = allBudgets;
 				return budgets;
@@ -133,5 +133,5 @@ function budgetService($q, deploydService, incomeService) {
 	this.overviewUtilizationTotal = overviewUtilizationTotal;
 }
 
-angular.module('budgettingIsFun')
-	.service('budgetService', ['$q', 'deploydService', 'incomeService', budgetService]);
+angular.module('budgetingIsFun')
+	.service('budgetService', ['$q', 'deploydService', 'incomeService', 'dataService', budgetService]);

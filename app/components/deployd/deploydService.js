@@ -143,6 +143,6 @@ function deploydService($http, $q, deployd) {
 	this.getIncomeType = incomeType;
 }
 
-angular.module('budgettingIsFun')
+angular.module('budgetingIsFun')
 	.constant('deployd', 'http://localhost:2403')
 	.service('deploydService', ['$http', '$q', 'deployd', deploydService]);

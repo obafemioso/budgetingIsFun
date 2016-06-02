@@ -1,4 +1,4 @@
-angular.module('budgettingIsFun')
+angular.module('budgetingIsFun')
 	.controller('ProjectedBalanceController', ['projectedBalanceService', 
 		function(projectedBalanceService) {
 			var self = this; 

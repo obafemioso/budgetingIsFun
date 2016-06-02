@@ -9,12 +9,14 @@ gulp.task('build', function() {
 	gulp.src([
     'node_modules/angular/angular.js', 
     'node_modules/angular-filter/dist/angular-filter.js', 
-    'assets/libs/*[^min].js', 'app/filters/*.js'
+    'assets/libs/*[^min].js', 'app/filters/*.js',
+    'node_modules/firebase/firebase.js',
+    'node_modules/angularfire/dist/angularfire.js'
     ])
 		.pipe(sourcemaps.init())
       .pipe(concat('plugins.js'))
       .pipe(ngAnnotate())
-      .pipe(uglify())
+      // .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('.'))
 });
@@ -24,7 +26,7 @@ gulp.task('js', function () {
   	.pipe(sourcemaps.init())
     	.pipe(concat('app.js'))
     	.pipe(ngAnnotate())
-    	.pipe(uglify())
+    	// .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('.'))
     .pipe(livereload({start:true}));

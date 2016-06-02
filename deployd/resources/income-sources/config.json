@@ -40,6 +40,14 @@
 			"required": true,
 			"id": "taxPercent",
 			"order": 4
+		},
+		"userId": {
+			"name": "userId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": true,
+			"id": "userId",
+			"order": 5
 		}
 	}
 }

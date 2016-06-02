@@ -7,12 +7,11 @@ function projectedBalanceService(incomeService, budgetService) {
 	};
 
 	var coreExpenses = function(multiple) {
-		return (angular.isNumber(multiple)) ? budgetService.totalCore() * multiple : budgetService.totalCore();
 	};
 
 	this.getBalance = getBalance;
 	this.getCoreExpenses = coreExpenses;
 }
 
-angular.module('budgettingIsFun')
+angular.module('budgetingIsFun')
 	.service('projectedBalanceService', ['incomeService', 'budgetService', projectedBalanceService]);
