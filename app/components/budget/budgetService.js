@@ -8,7 +8,7 @@ function budgetService($q, deploydService, incomeService, dataService) {
 		if(budgets.length != 0){
 			return $q.when(budgets);
 		}
-		return dataService.getBudgets()
+		return deploydService.getAllBudgets()
 			.then(function(allBudgets) {
 				budgets = allBudgets;
 				return budgets;

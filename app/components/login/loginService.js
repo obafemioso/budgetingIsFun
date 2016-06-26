@@ -1,4 +1,4 @@
-function loginService($q, dataService) {
+function loginService($q, authService) {
 	/*Templates
 
 		user
@@ -7,40 +7,24 @@ function loginService($q, dataService) {
 			password : string
 		}
 	*/
-	var currentUser = null;
 
 	var createUser = function(newUser) {
-		dataService.createUser(newUser.email, newUser.password);
+		authService.createUser(newUser.email, newUser.password);
 	};
 
 	var login = function(user) {
-		console.log('attempting login');
-		console.log(user);
-		dataService.login(user.email, user.password);
+		authService.login(user.email, user.password);
 	};
 
 	var signOut = function() {
-		dataService.signOut();
-	};
-
-	var getCurrentUser = function() {
-		return dataService.getCurrentUser()
-			.then(function(user) {
-				currentUser = user;
-				return  currentUser;
-			})
-			.catch(function(error) {
-				console.log(error);
-				currentUser = null;
-				return currentUser;
-			});
+		authService.signOut();
 	};
 
 	this.createUser = createUser;
 	this.login = login;
 	this.signOut = signOut;
-	this.getCurrentUser = getCurrentUser;
+	this.getUser = authService.getUser;
 }
 
 angular.module('budgetingIsFun')
-	.service('loginService', ['$q', 'dataService', loginService]);
+	.service('loginService', ['$q', 'authService', loginService]);

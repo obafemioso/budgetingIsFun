@@ -1,6 +1,6 @@
 <div ng-controller="LoginController as loginCtrl">
 	<h3>Current User</h3>
-	{{loginCtrl.currentUser.email}}
+	{{loginCtrl.user.data.email}}
 	<h3>Create User</h3>
 	<form ng-submit="loginCtrl.createUser(loginCtrl.newUser)">
 		<label>Email</label>
@@ -11,11 +11,11 @@
 	</form>
 
 	<h3>Login</h3>
-	<form ng-submit="loginCtrl.login(loginCtrl.user)">
+	<form ng-submit="loginCtrl.login(loginCtrl.userLogin)">
 		<label>Email</label>
-		<input type="email" ng-model="loginCtrl.user.email" ngRequired="true" />
+		<input type="email" ng-model="loginCtrl.userLogin.email" ngRequired="true" />
 		<label>Password</label>
-		<input type="text" ng-model="loginCtrl.user.password" ngRequired="true" />
+		<input type="text" ng-model="loginCtrl.userLogin.password" ngRequired="true" />
 		<button type="submit">Login</button>
 	</form>
 	<button ng-click="loginCtrl.signOut()">Sign Out</button>

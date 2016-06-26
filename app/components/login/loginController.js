@@ -1,18 +1,12 @@
 angular.module('budgetingIsFun')
-	.controller('LoginController', ['loginService', function(loginService) {
+	.controller('LoginController', ['loginService', '$scope', function(loginService, $scope) {
 		var self = this;
 
-		self.currentUser = null;
-
-		loginService.getCurrentUser()
-			.then(function(user) {
-				self.currentUser = user;
-			}, function(err) {
-				console.log(err);
-				self.currentUser = null;
-			});
+		self.user = loginService.getUser();
 
 		self.createUser = loginService.createUser;
 		self.login = loginService.login;
 		self.signOut = loginService.signOut;
+
+		$scope.$watch(self.user);
 	}]);

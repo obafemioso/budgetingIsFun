@@ -11,7 +11,7 @@
     "http-server": "^0.9.0"
   },
   "dependencies": {
-    "angularfire": "^2.0.0",
+    "angularfire": "^2.0.1",
     "firebase": "^3.0.3"
   }
 }
